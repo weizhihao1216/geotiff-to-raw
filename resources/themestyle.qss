@@ -1,0 +1,226 @@
+/* ===================================================================
+   GeoTIFF 转 Raw Binary 转换工具 - Premium Modern Dark Theme
+   Theme File: themestyle.qss
+   =================================================================== */
+
+/* --- 全局窗口与基础部件 --- */
+QMainWindow, QDialog {
+    background-color: #16181d;
+    color: #e3e6ed;
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    font-size: 13px;
+}
+
+QWidget {
+    color: #e3e6ed;
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+/* --- 顶栏 Header 卡片 --- */
+#headerFrame {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1f232d, stop:1 #272c38);
+    border: 1px solid #2e3444;
+    border-radius: 8px;
+}
+
+#lblTitle {
+    font-size: 19px;
+    font-weight: bold;
+    color: #389fd6;
+    letter-spacing: 0.5px;
+}
+
+#lblSubTitle {
+    font-size: 12px;
+    color: #8c96a8;
+}
+
+/* --- GroupBox 卡片分组 --- */
+QGroupBox {
+    font-size: 13px;
+    font-weight: bold;
+    color: #389fd6;
+    background-color: #1e2129;
+    border: 1px solid #2d3240;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 12px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 12px;
+    padding: 2px 8px;
+    background-color: #16181d;
+    border: 1px solid #2d3240;
+    border-radius: 4px;
+    color: #389fd6;
+}
+
+/* --- 输入框 QLineEdit --- */
+QLineEdit {
+    background-color: #121418;
+    border: 1px solid #303545;
+    border-radius: 5px;
+    padding: 6px 10px;
+    color: #ffffff;
+    selection-background-color: #0078d4;
+    font-size: 13px;
+}
+
+QLineEdit:hover {
+    border: 1px solid #454c61;
+}
+
+QLineEdit:focus {
+    border: 1px solid #0078d4;
+    background-color: #14171f;
+}
+
+/* --- 按钮 QPushButton --- */
+QPushButton {
+    background-color: #2b303e;
+    border: 1px solid #3d4457;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 6px 14px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+QPushButton:hover {
+    background-color: #363d4f;
+    border-color: #525c75;
+}
+
+QPushButton:pressed {
+    background-color: #202430;
+    border-color: #389fd6;
+}
+
+QPushButton:disabled {
+    background-color: #1a1c22;
+    border-color: #252832;
+    color: #585e6e;
+}
+
+/* 专项：主功能转换按钮 */
+#btnStart {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0066b8, stop:1 #0084e3);
+    border: 1px solid #0091ff;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+#btnStart:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0076d6, stop:1 #1a94ff);
+    border-color: #4da6ff;
+}
+
+#btnStart:pressed {
+    background-color: #005299;
+}
+
+#btnStart:disabled {
+    background: #252832;
+    border-color: #1e2129;
+    color: #585e6e;
+}
+
+/* 专项：查询高程测试按钮 */
+#btnQuery {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0078d4, stop:1 #00b4d8);
+    border: 1px solid #00c3ff;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+#btnQuery:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1084d8, stop:1 #00c8e6);
+    border-color: #5ce1ff;
+}
+
+#btnQuery:pressed {
+    background-color: #005a9e;
+}
+
+/* --- 复选框 QCheckBox --- */
+QCheckBox {
+    color: #d4d8e8;
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #3d4457;
+    border-radius: 3px;
+    background-color: #121418;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #0078d4;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #0078d4;
+    border-color: #0078d4;
+}
+
+/* --- 元数据标签样式 --- */
+#metaValue {
+    color: #00e6a8;
+    font-weight: bold;
+    font-family: "Consolas", "Segoe UI", monospace;
+    font-size: 13px;
+}
+
+/* --- 进度条 QProgressBar --- */
+QProgressBar {
+    border: 1px solid #2d3240;
+    border-radius: 6px;
+    text-align: center;
+    background-color: #121418;
+    color: #ffffff;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+QProgressBar::chunk {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0078d4, stop:1 #00e6a8);
+    border-radius: 5px;
+}
+
+/* --- 控制台日志窗口 QTextEdit --- */
+QTextEdit {
+    background-color: #0d0e12;
+    border: 1px solid #2a2e3b;
+    border-radius: 6px;
+    color: #00e6a8;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 12px;
+    padding: 6px;
+}
+
+/* --- 滚动条 QScrollBar --- */
+QScrollBar:vertical {
+    background-color: #121418;
+    width: 10px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #2e3444;
+    border-radius: 5px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #3d4457;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
