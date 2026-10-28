@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi();
     applyStyleSheet();
     setAcceptDrops(true);
-    setWindowTitle("GeoTIFF 转 Raw Binary 数据导出与测试工具 v1.0");
+    setWindowTitle("geotiff-to-raw - GeoTIFF 转 Raw Binary 数据导出与测试工具 v1.0");
     resize(1180, 780);
 }
 
@@ -51,7 +51,7 @@ void MainWindow::setupUi() {
     QVBoxLayout *headerLayout = new QVBoxLayout(headerFrame);
     headerLayout->setContentsMargins(12, 10, 12, 10);
 
-    QLabel *lblTitle = new QLabel("GeoTIFF 高程/地形转 Raw Binary 工具", headerFrame);
+    QLabel *lblTitle = new QLabel("geotiff-to-raw: GeoTIFF 高程/地形转 Raw Binary 工具", headerFrame);
     lblTitle->setObjectName("lblTitle");
     QLabel *lblDesc = new QLabel("快速解析 GEBCO/GeoTIFF 海底高程栅格，提取 32 位浮点 Raw 数据与地理空间元数据", headerFrame);
     lblDesc->setObjectName("lblSubTitle");

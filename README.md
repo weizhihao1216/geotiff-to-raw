@@ -1,4 +1,4 @@
-# EnvDataTool / TiffToRawGui - 地理地形与高程数据处理平台
+# geotiff-to-raw - 地理地形与高程数据处理平台
 
 <p align="center">
   <img src="https://img.shields.io/badge/C%2B%2B-11-blue.svg" alt="C++11" />
@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
 </p>
 
-`EnvDataTool`（可执行目标名：`TiffToRawGui`）是一个基于 C++11、GDAL 与 Qt5 开发的高性能 GeoTIFF 栅格地形/水深高程数据处理与格式转换平台。
+`geotiff-to-raw`（可执行目标名：`geotiff-to-raw.exe`）是一个基于 C++11、GDAL 与 Qt5 开发的高性能 GeoTIFF 栅格地形/水深高程数据处理与格式转换平台。
 
 本工具旨在将各类超大地理空间高程/水深栅格数据（如 GEBCO 全球水深与陆地高程、ETOPO、SRTM 等 GeoTIFF）高效转换为紧凑的 32 位浮点数原始二进制高度场 (`.bin`)，并同步导出规范的元数据描述（`.txt` 与 `.json`），供各类游戏引擎（Unreal Engine、Unity、自研 C++ 渲染引擎）直接进行纳秒级内存加载与双线性插值采样。
 
@@ -46,7 +46,7 @@
 ## 📁 目录结构
 
 ```
-EnvDataTool/
+geotiff-to-raw/
 ├── CMakeLists.txt         # CMake 构建工程定义
 ├── build.bat              # Windows 一键编译与分发打包脚本
 ├── README.md              # 项目主说明文档
@@ -76,12 +76,19 @@ EnvDataTool/
 
 ---
 
-## 📥 预编译版本使用 (免环境配置)
+## 📥 预编译版本与测试数据下载 (免环境配置)
 
-如果您不需要修改源码，仅希望直接使用该工具：
-1. 前往本仓库右侧的 [Releases](https://github.com/) 页面；
-2. 下载最新发布的绿色免安装压缩包（例如 `EnvDataTool-v1.0.0-windows-x64.zip`）；
-3. 解压后直接双击运行 `TiffToRawGui.exe` 即可，无需在本地配置 Qt5 或 GDAL 开发环境。
+如果您不需要修改源码，仅希望直接使用该工具或获取开箱即用的高度场测试数据，可前往本仓库右侧的 [Releases](https://github.com/) 页面按需下载对应版本的发布包：
+
+| 发布包名称 (符合标准格式 A) | 体积 | 包含内容 | 适用场景 / 推荐人群 |
+| :--- | :---: | :--- | :--- |
+| **`geotiff-to-raw_v1.0.0_windows_x64.zip`**<br>*(标准程序发布包)* | **~11 MB** | • `geotiff-to-raw.exe` 二合一主程序<br>• Qt5 / GDAL 完整运行时 DLL<br>• 平台插件与主题样式表<br>• `sdk/` 游戏引擎端 C++ 采样源码<br>• 完整说明文档与许可 | **⭐ 绝大多数用户首选**。<br>自带 GeoTIFF 数据；或后续版本升级时快速下载（无需重复下载庞大地图数据）。 |
+| **`geotiff-to-raw_v1.0.0_sample_data.zip`**<br>*(示例测试数据集包)* | **~83 MB** | • 示例 GeoTIFF 高程源图 (`.tif`)<br>• 转换导出的 32 位浮点高度场 (`.bin`)<br>• 配套空间元数据 (`.json` / `.txt`)<br>• `data/README.md` 数据说明 | **需要示例数据的开发者**。<br>解压后将文件放入 `data/` 目录，即可直接在软件中测试或对接游戏引擎 SDK 验证插值效果。 |
+| **`geotiff-to-raw_v1.0.0_windows_x64_full.zip`**<br>*(全合一开箱即用版)* | **~94 MB** | • 内置标准程序包的所有可执行文件与驱动<br>• **内置** `data/` 目录下的完整测试数据 | **新手 / 懒人一体化体验**。<br>解压后双击即可直接点选测试或运行 SDK，无需单独下载或手动移动数据文件。 |
+
+> [!NOTE]
+> **关于数据文件的发布策略说明**：
+> 原始高程 GeoTIFF (`.tif`) 与转换后的二进制高度场 (`.bin`) 通常体积在数十 MB 至数百 MB 以上。为了避免 Git 源码仓库体积永久膨胀并保证 `git clone` 毫秒级拉取，**大体积测试数据未直接存放在 Git 仓库中，而是作为独立附件上传至 GitHub Releases 发布页**。
 
 ---
 
@@ -92,9 +99,10 @@ EnvDataTool/
 - **操作系统**: Windows 7 / 10 / 11 (x64)
 - **编译器**: Visual Studio 2017 (MSVC v141) 或更新版本 (支持 C++11)
 - **构建工具**: CMake 3.10 或更高版本
-- **第三方库**:
-  - **Qt 5.x** (包含 Widgets, Core, Gui 模块)
-  - **GDAL** (1.11 / 2.x / 3.x)
+- **第三方库与环境变量**:
+  - **环境变量 `ThirdPart`**: 建议在系统或用户环境变量中配置 `ThirdPart`（例如 `D:\HR\DEV\ThirdParty`），工程将自动索引 `ThirdPart/gdal111` 与 `ThirdPart/Qt5.11`；
+  - **Qt 5.x** (包含 Widgets, Core, Gui 模块)；
+  - **GDAL** (1.11 / 2.x / 3.x)。
 
 ### 1. 一键编译与打包 (推荐)
 
@@ -105,27 +113,31 @@ build.bat
 ```
 
 脚本将自动完成：
-1. 检查环境变量 (`QT_DIR`, `GDAL_INC`, `GDAL_LIB`, `GDAL_DLL`)，若未设置则使用默认路径；
+1. 优先读取系统 `ThirdPart` 环境变量推导依赖路径（亦支持单独指定 `QT_DIR`, `GDAL_INC`, `GDAL_LIB`, `GDAL_DLL`）；
 2. 执行 CMake 配置（生成 64 位 Visual Studio 工程）；
-3. 以 Release 模式编译 `TiffToRawGui.exe`；
+3. 以 Release 模式编译 `geotiff-to-raw.exe`；
 4. 将可执行程序、动态库 (Qt5, GDAL, qwindows.dll 平台插件)、QSS 样式表及 `RawTerrainReader` SDK 源码自动整理复制至 `dist/` 目录。
 
-编译完成后，进入 `dist/` 目录直接双击 `TiffToRawGui.exe` 即可运行。
+编译完成后，进入 `dist/` 目录直接双击 `geotiff-to-raw.exe` 即可运行。
 
 ### 2. 手动 CMake 编译
 
-可通过命令行显式指定 GDAL 与 Qt5 路径：
+在配置好 `ThirdPart` 环境变量后，直接运行即可自动识别依赖：
 
 ```cmd
-mkdir build
-cd build
+cmake -B build -A x64
+cmake --build build --config Release
+```
 
-cmake -G "Visual Studio 15 2017 Win64" ^
+若需自定义指定特定路径，亦可通过命令行显式传入参数：
+
+```cmd
+cmake -B build -A x64 ^
       -DGDAL_INCLUDE_DIR="D:/path/to/gdal/include" ^
       -DGDAL_LIBRARY="D:/path/to/gdal/lib/gdal_i.lib" ^
-      -DQT5_INSTALL_DIR="D:/path/to/Qt5.11/vc140/x64" ..
+      -DQT5_INSTALL_DIR="D:/path/to/Qt5.11/vc140/x64"
 
-cmake --build . --config Release
+cmake --build build --config Release
 ```
 
 ---
@@ -134,7 +146,7 @@ cmake --build . --config Release
 
 ### 1. 图形界面模式 (GUI Mode)
 
-双击 `TiffToRawGui.exe` 即可启动图形界面：
+双击 `geotiff-to-raw.exe` 即可启动图形界面：
 
 1. **输入与选项配置**:
    - 点击“浏览”或直接将 GeoTIFF 文件 (`.tif` / `.tiff`) **拖拽至窗口**中。
@@ -152,14 +164,14 @@ cmake --build . --config Release
 
 ---
 
-### 2. 命令行批处理模式 (CLI Batch Mode)
+## 2. 命令行批处理模式 (CLI Batch Mode)
 
 传入命令行参数时，工具自动运行于静默批处理模式，适合接入自动化资产处理管线：
 
 #### 语法格式
 
 ```cmd
-TiffToRawGui.exe <input_tif_path> <output_bin_path> [选项]
+geotiff-to-raw.exe <input_tif_path> <output_bin_path> [选项]
 ```
 
 #### 参数说明
@@ -179,13 +191,13 @@ TiffToRawGui.exe <input_tif_path> <output_bin_path> [选项]
 
 ```cmd
 # 基础转换 (生成 gebco.bin, gebco.txt, gebco.json)
-TiffToRawGui.exe GEBCO_2026.tif gebco.bin
+geotiff-to-raw.exe GEBCO_2026.tif gebco.bin
 
 # 启用 Y 轴垂直翻转
-TiffToRawGui.exe GEBCO_2026.tif gebco.bin --flip-y
+geotiff-to-raw.exe GEBCO_2026.tif gebco.bin --flip-y
 
 # 自定义元数据输出位置
-TiffToRawGui.exe GEBCO_2026.tif gebco.bin --meta-txt D:/meta/info.txt --meta-json D:/meta/info.json
+geotiff-to-raw.exe GEBCO_2026.tif gebco.bin --meta-txt D:/meta/info.txt --meta-json D:/meta/info.json
 ```
 
 ---

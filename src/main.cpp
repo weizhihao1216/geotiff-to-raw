@@ -13,7 +13,7 @@
 
 void PrintUsage(const char* exeName) {
     std::cout << "===============================================================\n";
-    std::cout << " GeoTIFF 转 Raw Binary 转换工具 (TiffToRawGui)\n";
+    std::cout << " geotiff-to-raw: GeoTIFF 转 Raw Binary 转换工具\n";
     std::cout << "===============================================================\n";
     std::cout << "图形界面模式:\n";
     std::cout << "  直接双击运行程序或在命令行中无参数运行 " << exeName << " 打开 GUI 界面。\n\n";
@@ -78,7 +78,7 @@ int RunCliMode(int argc, char* argv[]) {
         }
     }
 
-    std::cout << "\n=== TiffToRaw 命令行模式转换开始 ===" << std::endl;
+    std::cout << "\n=== geotiff-to-raw 命令行模式转换开始 ===" << std::endl;
     std::cout << "输入文件: " << inputTiffPath << std::endl;
     std::cout << "输出文件: " << outputBinPath << std::endl;
     if (flipY) {
@@ -131,8 +131,8 @@ int main(int argc, char *argv[]) {
 #endif
 
     QApplication app(argc, argv);
-    app.setApplicationName("TiffToRawGui");
-    app.setApplicationDisplayName("GeoTIFF 转 Raw Binary 转换工具");
+    app.setApplicationName("geotiff-to-raw");
+    app.setApplicationDisplayName("geotiff-to-raw - GeoTIFF 转 Raw Binary 转换工具");
 
     if (argc >= 2) {
         std::string firstArg = argv[1];
